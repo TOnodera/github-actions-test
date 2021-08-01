@@ -1,0 +1,26 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubunts-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js 14.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: '14.x'
+
+    - name: Build Project
+      run: |
+        npm i
+        npm build
+
+    - name: List output files
+      run: ls -al
